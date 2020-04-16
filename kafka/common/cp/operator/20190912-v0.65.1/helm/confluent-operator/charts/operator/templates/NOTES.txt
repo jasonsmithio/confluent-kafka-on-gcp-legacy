@@ -1,0 +1,15 @@
+                                              The Confluent Operator
+
+{{- if .Values.global.provider.registry.credential.required }}
+  1. Give the `default` Service Account access to pull images from {{ .Values.global.provider.registry.fqdn }}
+
+  kubectl -n {{ .Release.Namespace }} patch serviceaccount default -p '{"imagePullSecrets": [{"name": "confluent-docker-registry" }]}'
+{{- end }}
+
+  2. Validate if Confluent Operator is running.
+
+  kubectl get pods -n {{ .Release.Namespace }}
+
+  3. Validate if custom resource definition (CRD) is created.
+
+  kubectl get crd -n {{ .Release.Namespace }}

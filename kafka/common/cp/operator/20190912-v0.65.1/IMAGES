@@ -1,0 +1,11 @@
+connect: 5.3.1.0
+controlcenter: 5.3.1.0
+externaldns: v0.5.14
+kafka: 5.3.1.0
+ksql: 5.3.1.0
+manager: 0.30.0
+operator: 0.176.1
+replicator: 5.3.1.0
+schemaregistry: 5.3.1.0
+zookeeper: 5.3.1.0
+init-container: 5.3.1.0

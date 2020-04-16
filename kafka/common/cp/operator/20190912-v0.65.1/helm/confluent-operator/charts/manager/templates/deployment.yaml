@@ -1,0 +1,58 @@
+{{- $_ := required "Namespace is required" .Release.Namespace }}
+{{- $_ := required "Name of operator is required." $.Values.name }}
+{{- $_ := required "Docker Repository FQDN path is required" .Values.global.provider.registry.fqdn }}
+{{- if .Capabilities.APIVersions.Has "v1" }}
+apiVersion: apps/v1
+{{ else if .Capabilities.APIVersions.Has "v1beta2" }}
+apiVersion: apps/v1beta2
+{{- else }}
+apiVersion: apps/v1beta1
+{{- end }}
+kind: Deployment
+metadata:
+  {{- include "confluent-operator.labels" . }}
+  name: {{ .Values.name }}
+  namespace:  {{ .Release.Namespace }}
+  component: {{ .Values.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "7778"
+        prometheus.io/scrape: "true"
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      {{- if not (empty $.Values.affinity) }}
+      affinity:
+{{ toYaml .Values.affinity | trim | indent 8 }}
+      {{- end }}
+      {{- if not (empty $.Values.tolerations) }}
+      tolerations:
+{{ toYaml .Values.tolerations | trim | indent 6 }}
+      {{- end }}
+      containers:
+      - name: {{ .Values.name }}
+        image: {{ .Values.global.provider.registry.fqdn }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- if .Values.debug }}
+        env:
+        - name: ENABLE_DEBUG
+          value: "true"
+        {{- end }}
+        resources:
+{{ toYaml .Values.resources | trim | indent 10 }}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      serviceAccount: {{ .Values.name }}
+      serviceAccountName: {{ .Values.name }}
+      restartPolicy: Always
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+
+

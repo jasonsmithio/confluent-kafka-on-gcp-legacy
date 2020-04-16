@@ -1,0 +1,52 @@
+enabled: false
+## Confluent manager name
+##
+name: cc-manager
+## Confluent Manager Image Information
+##
+image:
+  repository: confluentinc/cp-manager
+  tag:  0.30.0
+  pullPolicy: Always
+## Confluent Operator Pod Resources
+##
+resources:
+  limits:
+    cpu: 200m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+## Pod termination grace-period
+##
+terminationGracePeriodSeconds: 30
+## Enable debugging
+##
+debug: false
+##
+## Configure affinity,
+## More information here https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+##
+affinity: {}
+##  Example for nodeAffinity, configure as required.
+##affinity:
+##  nodeAffinity:
+##    requiredDuringSchedulingIgnoredDuringExecution:
+##      nodeSelectorTerms:
+##      - matchExpressions:
+##        - key: "node-role.kubernetes.io/compute"
+##          operator: In
+##          values:
+##          - "true"
+
+##
+## Configure tolerations
+## https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+##
+##tolerations:
+##- key: "dedicated"
+##  operator: "Equal"
+##  value: "operator"
+##  effect: "NoSchedule"
