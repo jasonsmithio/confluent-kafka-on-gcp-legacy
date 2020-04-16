@@ -6,7 +6,7 @@ include $(GKE_BASE_MKFILE_DIR)../common/Makefile
 
 GCP_PROJECT_ID ?= $(shell gcloud config list --format 'value(core.project)')
 
-GKE_BASE_CLUSTER_ID ?= cp-examples-operator-$(CLUSTER_NAME)
+GKE_BASE_CLUSTER_ID ?= cp-examples-operator-gcp
 GKE_BASE_REGION ?= us-central1
 GKE_BASE_ZONE ?= us-central1-a
 GKE_BASE_SUBNET ?= default
