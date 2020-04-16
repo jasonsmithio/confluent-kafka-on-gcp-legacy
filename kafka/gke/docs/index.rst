@@ -30,12 +30,12 @@ The following applications or libraries are required to be installed and availab
 +------------------+----------------+---------------------------------------------------------+
 | Application      | Tested Version | Info                                                    |
 +==================+================+=========================================================+
-| ``kubectl``      | ``1.14.3``     | https://kubernetes.io/docs/tasks/tools/install-kubectl/ |
+| ``kubectl``      | ``1.18.0``     | https://kubernetes.io/docs/tasks/tools/install-kubectl/ |
 +------------------+----------------+---------------------------------------------------------+
-| ``helm``         | ``2.12.3``     | https://github.com/helm/helm/releases/tag/v2.12.3       |
+| ``helm``         | ``3.1.2``      | https://github.com/helm/helm/releases/tag/v2.12.3       |
 +------------------+----------------+---------------------------------------------------------+
-| ``gcloud``       | ``259.0.0``    |  https://cloud.google.com/sdk/install                   |
-| ``GCP sdk core`` | ``2019.08.23`` |                                                         |
+| ``gcloud``       | ``286.0.0``    |  https://cloud.google.com/sdk/install                   |
+| ``GCP sdk core`` | ``2020.03.24`` |                                                         |
 +------------------+----------------+---------------------------------------------------------+
 
 .. include:: ../../docs/includes/helm-requirement-note.rst
@@ -133,7 +133,6 @@ Using the default demo variable values, ``kubectl`` should report something like
 ::
 
 	NAME                                        READY   STATUS      RESTARTS   AGE
-	pod/cc-manager-566965d74f-4hblt             1/1     Running     0          11m
 	pod/cc-operator-76c54d65cd-28czd            1/1     Running     0          11m
 	pod/clicks-datagen-connector-deploy-2vd8q   0/1     Completed   0          8m6s
 	pod/connectors-0                            1/1     Running     0          9m36s
@@ -156,11 +155,9 @@ Using the default demo variable values, ``kubectl`` should report something like
 	service/zookeeper-0-internal        ClusterIP   10.0.8.51     <none>        3888/TCP,2888/TCP,2181/TCP,7203/TCP,7777/TCP   11m
 
 	NAME                          DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-	deployment.apps/cc-manager    1         1         1            1           11m
 	deployment.apps/cc-operator   1         1         1            1           11m
 
 	NAME                                     DESIRED   CURRENT   READY   AGE
-	replicaset.apps/cc-manager-566965d74f    1         1         1       11m
 	replicaset.apps/cc-operator-76c54d65cd   1         1         1       11m
 
 	NAME                              DESIRED   CURRENT   AGE
@@ -186,7 +183,7 @@ By default the demo is deployed without any `Kubernetes Ingress <https://kuberne
 
 The demo deploys a ``client-console`` pod that can be used to open a terminal inside the cluster with network connectivity to the |cp| services.  For example::
 
-	kubectl -n operator exec -it client-console bash
+	kubectl -n operator exec -it client-console -- bash
 
 From here you can execute standard |ak| commands to validate the cluster.  You need to provide the commands with the required connectivity and security configurations, which are provided in mapped files on the ``client-console`` pod.  See the :ref:`examples-operator-gke-base-client-configurations` Highlight for more information.
 
