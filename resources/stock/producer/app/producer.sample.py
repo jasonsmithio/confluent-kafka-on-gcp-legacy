@@ -15,7 +15,11 @@ from kafka.producer import SimpleProducer
 
 app = Flask(__name__)
 
-producer = KafkaProducer(bootstrap_servers=['kafka-cluster-kafka-bootstrap.kafka:9092'])
+producer = KafkaProducer(bootstrap_servers=['KAFKA_IP/kafka'],
+                         sasl_plain_username = 'test',
+                         sasl_plain_password = 'test123',
+                         sasl_mechanism=sasl_mechanism)
+sasl_mechanism = 'PLAIN'
 
 
 

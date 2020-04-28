@@ -7,6 +7,7 @@ ADD . .
 
 # Install production dependencies.
 RUN apt-get update && \
+    pip install --upgrade pip && \
     pip install -r requirements.txt
 
 
