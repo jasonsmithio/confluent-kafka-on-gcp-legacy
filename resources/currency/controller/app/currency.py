@@ -37,4 +37,4 @@ while True:
     headers = {'Content-Type': 'application/cloudevents+json'}
     body = get_currency()
     requests.post(sink_url, data=json.dumps(body), headers=headers)
-    time.sleep(15)
+    time.sleep(45)
