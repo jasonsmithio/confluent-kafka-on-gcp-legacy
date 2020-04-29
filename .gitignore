@@ -1,10 +1,6 @@
 __pycache__
 .vscode
-staging/
-kafka-orig/
 producer.py
-kafka-demo.py
-kafka.py
 kafka-config.properties
 kafka-lb.yaml
 stock-controller.yaml
