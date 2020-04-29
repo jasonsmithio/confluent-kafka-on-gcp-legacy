@@ -8,18 +8,17 @@ from flask import Flask, jsonify, redirect, render_template, request, Response
 from google.cloud import secretmanager
 
 from kafka import KafkaProducer
-from kafka.client import SimpleClient
-from kafka.consumer import SimpleConsumer
-from kafka.producer import SimpleProducer
 
+sasl_mechanism = 'PLAIN'
 
 app = Flask(__name__)
 
-producer = KafkaProducer(bootstrap_servers=['KAFKA_IP/kafka'],
+producer = KafkaProducer(bootstrap_servers=['KAFKA_IP.xip.io:9092'],
                          sasl_plain_username = 'test',
                          sasl_plain_password = 'test123',
-                         sasl_mechanism=sasl_mechanism)
-sasl_mechanism = 'PLAIN'
+                         security_protocol='SASL_PLAINTEXT',
+                         sasl_mechanism='PLAIN')
+
 
 
 
