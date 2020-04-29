@@ -2,14 +2,11 @@ import os
 import json
 import logging
 import time
+import json
 
 from flask import Flask, jsonify, redirect, render_template, request, Response
 
-from google.cloud import secretmanager
-
 from kafka import KafkaProducer
-
-sasl_mechanism = 'PLAIN'
 
 app = Flask(__name__)
 
@@ -32,15 +29,12 @@ def default_route():
         content = request.data.decode('utf-8')
         info(f'Event Display received event: {content}')
 
-        producer.send('money-demo', bytes(content, encoding='utf-8'))
+        y = content.replace("[","").replace(" ","").split(",")
+        for i in range(20):
+            producer.send('money-demo', bytes(y[i], encoding='utf-8'))
+
         return jsonify(hello=str(content))
     else:
-
-    #app.logger.debug(‘this is a DEBUG message’)
-    #app.logger.info(‘this is an INFO message’)
-    #app.logger.warning(‘this is a WARNING message’)
-    #app.logger.error(‘this is an ERROR message’)
-    #app.logger.critical(‘this is a CRITICAL message’)
         return jsonify('hello world')
 
 
