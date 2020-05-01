@@ -1,32 +1,3 @@
-Skip to content
-Why GitHub? 
-Team
-Enterprise
-Explore 
-Marketplace
-Pricing 
-Search
-
-Sign in
-Sign up
-confluentinc
-/
-examples
-65620425
- Code
- Issues 25
- Pull requests 11 Actions
- Projects 0
- Security 0
- Insights
-Join GitHub today
-GitHub is home to over 40 million developers working together to host and review code, manage projects, and build software together.
-
-examples/kubernetes/gke-base/cfg/values.yaml
-@rspurgeon rspurgeon DEVX-1314 Centralizes Operator demo versions (#561)
-e698686 17 days ago
-68 lines (62 sloc)  1.22 KB
-  
 global:
   provider:
     registry:
