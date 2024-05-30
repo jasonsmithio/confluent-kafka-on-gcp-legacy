@@ -7,4 +7,4 @@ Flask==3.0.0
 kafka-python==2.0.1
 gunicorn==22.0.0
 cloudevents==0.2.4
-requests==2.31.0
+requests>=2.32.0
